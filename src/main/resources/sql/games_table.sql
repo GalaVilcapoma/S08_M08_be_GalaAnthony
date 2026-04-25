@@ -1,10 +1,3 @@
--- ============================================================
--- Tabla: games  (reemplaza movies)
--- Base de datos: SQL Server  |  DB: EduSmartDB
--- ============================================================
-
--- 1. Eliminar tabla antigua si migras de movies
--- DROP TABLE IF EXISTS movies;
 
 CREATE TABLE games (
     id          BIGINT          IDENTITY(1,1) PRIMARY KEY,
@@ -20,9 +13,7 @@ CREATE TABLE games (
     available   BIT             DEFAULT 1
 );
 
--- ============================================================
--- Seed Data: videojuegos reales populares
--- ============================================================
+
 INSERT INTO games (title, description, genre, platform, developer, release_date, rating, price, image_url, available)
 VALUES
 ('GTA V',
