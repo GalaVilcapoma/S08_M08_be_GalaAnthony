@@ -27,17 +27,14 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query("UPDATE Game g SET g.available = :status WHERE g.id = :id")
     void updateStatus(@Param("id") Long id, @Param("status") Boolean status);
 
-    // Búsqueda por título o descripción (search?q=)
     @Query("SELECT g FROM Game g WHERE g.available = true AND " +
-           "(LOWER(g.title) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-           "LOWER(g.description) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-           "LOWER(g.developer) LIKE LOWER(CONCAT('%', :q, '%')))")
+            "(LOWER(g.title) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
+            "LOWER(g.description) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
+            "LOWER(g.developer) LIKE LOWER(CONCAT('%', :q, '%')))")
     List<Game> searchByQuery(@Param("q") String q);
 
-    // Filtrar por plataforma
     List<Game> findByPlatformIgnoreCaseAndAvailableTrue(String platform);
 
-    // Top rated (mayor rating, disponibles)
     @Query("SELECT g FROM Game g WHERE g.available = true ORDER BY g.rating DESC")
     List<Game> findTopRated();
 }
