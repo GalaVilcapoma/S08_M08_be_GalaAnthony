@@ -5,9 +5,10 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "movies")
+@Table(name = "games")
 @Data
-public class Movie {
+public class Game {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,24 +19,27 @@ public class Movie {
     @Column(length = 1000)
     private String description;
 
-    @Column
-    private String director;
-
-    @Column
-    private Integer year;
-
-    @Column
+    @Column(nullable = false)
     private String genre;
 
-    @Column
-    private Integer duration;
+    @Column(nullable = false)
+    private String platform;
+
+    @Column(nullable = false)
+    private String developer;
+
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
+
+    @Column(precision = 4)
+    private Double rating;
+
+    @Column(precision = 8)
+    private Double price;
 
     @Column(name = "image_url")
     private String imageUrl;
 
     @Column(name = "available")
     private Boolean available;
-
-    @Column(name = "release_date")
-    private LocalDate releaseDate;
 }
